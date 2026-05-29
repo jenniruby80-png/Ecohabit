@@ -1,20 +1,19 @@
 <?php
 require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/AktivitasController.php';
-require '../app/views/admin/dashboard.php';
 
+// Inisialisasi controller
+$auth = new AuthController();
 $aktivitas = new AktivitasController();
 
-$auth = new AuthController();
-
+// Ambil URL (default ke login)
 $url = $_GET['url'] ?? 'login';
-$url = $_GET['url'] ?? 'index';
 
-
+// Routing
 switch ($url) {
 
     case 'register':
-        $auth->register();
+        $auth->register();  
         break;
 
     case 'login':
@@ -46,20 +45,42 @@ switch ($url) {
         break;
 
     case 'grafik':
-    $aktivitas->grafik();
-    break;
+        $aktivitas->grafik();
+        break;
 
+    // route kosong (biar ga error kalau dipanggil)
     case 'user_list':
+        $auth->listUser();
+        break;
+
     case 'user_tambah':
+        $auth->tambahUser();
+        break;
+
+    case 'user_hapus':
+        $auth->hapusUser();
+        break;
+
     case 'kebiasaan_list':
+        $aktivitas->listKebiasaan();
+        break;
+
     case 'kebiasaan_tambah':
+        $aktivitas->tambahKebiasaan();
+        break;
+
+    case 'kebiasaan_hapus':
+        $aktivitas->hapusKebiasaan();
+        break;
+
     case 'laporan':
+        $aktivitas->laporan();
+        break;
+
     case 'grafik_admin':
-    
-    break;
+        $aktivitas->grafikAdmin();
+        break;
 
     default:
-        echo "404";
-
-        
+        echo "404 - Halaman tidak ditemukan";
 }

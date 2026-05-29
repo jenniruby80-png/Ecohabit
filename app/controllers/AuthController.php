@@ -79,4 +79,43 @@ class AuthController {
         session_destroy();
         header("Location: index.php?url=login");
     }
+
+    public function listUser() {
+        $users = $this->userModel->getAllUsers();
+        require '../app/views/admin/user_list.php';
+    }
+
+    public function tambahUser() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nama     = $_POST['nama'];
+            $email    = $_POST['email'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $role     = $_POST['role'];
+
+            $this->userModel->register([
+                'nama' => $nama,
+                'email' => $email,
+                'password' => $password,
+                'role' => $role
+            ]);
+
+            header('Location: index.php?url=user_list');
+            exit;
+        }
+
+        // kalau belum submit → tampilkan form
+        require '../app/views/admin/user_tambah.php';
+    }
+
+    public function hapusUser() {
+        $id = $_GET['id'];
+
+        $this->userModel->deleteUser($id);
+
+        header('Location: index.php?url=user_list');
+        exit;
+    }
+    
+
+
 }
