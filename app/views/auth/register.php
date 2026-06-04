@@ -17,13 +17,6 @@
 
     <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required><br><br>
 
-    <!-- 🔥 ROLE ADA DI SINI -->
-    <select name="role" required>
-        <option value="">-- Pilih Role --</option>
-        <option value="siswa">Siswa</option>
-        <option value="admin">Admin</option>
-    </select>
-
     <br><br>
 
     <button type="submit">Register</button>

@@ -4,39 +4,111 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
 }
 ?>
 
-<h1>Dashboard Admin</h1>
-
-<p>Halo Admin, <?= $_SESSION['user']['nama']; ?></p>
-
-<a href="index.php?url=logout">Logout</a>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Dashboard Admin</title>
+
     <style>
         body {
-            font-family: Arial;
-            background: #f3f3f3;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            margin: 0;
+            padding: 0;
         }
+
         .container {
-            width: 80%;
+            width: 85%;
             margin: auto;
+            padding: 20px;
         }
+
+        /* Header Sambutan */
+        .welcome {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .welcome h1 {
+            margin: 0;
+        }
+
+        .welcome p {
+            margin-top: 20px;
+        }
+
+
+        .stat-box {
+            flex: 1;
+            background: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-box h2 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+             margin-top: 50px;
+        }
+
         .card {
             background: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
         .btn {
-            padding: 10px;
-            background: #1976d2;
+            display: inline-block;
+            padding: 10px 18px;
+            background: #43a047;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            display: inline-block;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #2e7d32;
+        }
+
+        /* Logout */
+        .logout-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e53935;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #c62828;
         }
     </style>
 </head>
@@ -44,38 +116,43 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
 
 <div class="container">
 
-    <h2>Dashboard Admin 👑</h2>
-
-    <!-- USER -->
-    <div class="card">
-        <h3>👤 Manajemen User</h3>
-        <a href="index.php?url=user_list" class="btn">Lihat User</a>
-        <a href="index.php?url=user_tambah" class="btn">Tambah User</a>
+    
+    <div class="welcome">
+        <h1>👋 Halo, <?= $_SESSION['user']['nama']; ?></h1>
+        <p>Selamat datang di Dashboard Admin Sistem Monitoring Kebiasaan Ramah Lingkungan</p>
     </div>
 
-    <!-- KEBIASAAN -->
-    <div class="card">
-        <h3>📝 Manajemen Kebiasaan</h3>
-        <a href="index.php?url=kebiasaan_list" class="btn">Lihat Kebiasaan</a>
-        <a href="index.php?url=kebiasaan_tambah" class="btn">Tambah Kebiasaan</a>
-    </div>
+    <div class="menu-grid">
 
-    <!-- LAPORAN -->
-    <div class="card">
-        <h3>📊 Laporan Aktivitas</h3>
-        <a href="index.php?url=laporan" class="btn">Lihat Laporan</a>
-    </div>
+        <div class="card">
+            <h3>👤 Manajemen User</h3>
+            <a href="index.php?url=user_list" class="btn">
+                Kelola User
+            </a>
+        </div>
 
-    <!-- GRAFIK -->
-    <div class="card">
-        <h3>📈 Grafik Sistem</h3>
-        <a href="index.php?url=grafik_admin" class="btn">Lihat Grafik</a>
-    </div>
+        <div class="card">
+            <h3>📝 Manajemen Kebiasaan</h3>
+            <a href="index.php?url=kebiasaan_list" class="btn">
+                Kelola Kebiasaan
+            </a>
+        </div>
 
-    <br>
-    <a href="index.php?url=logout">Logout</a>
+        <div class="card">
+            <h3>📊 Laporan Aktivitas</h3>
+            <a href="index.php?url=laporan" class="btn">
+                Lihat Laporan
+            </a>
+        </div>
+
+    </div>
 
 </div>
+
+<!-- Logout -->
+<a href="index.php?url=logout" class="logout-btn">
+    Logout
+</a>
 
 </body>
 </html>

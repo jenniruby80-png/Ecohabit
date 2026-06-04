@@ -28,9 +28,9 @@ switch ($url) {
         require '../app/views/admin/dashboard.php';
         break;
 
-    case 'siswa':
-        require '../app/views/siswa/dashboard.php';
-        break;
+   case 'siswa':
+    $aktivitas->dashboard();
+    break;
 
     case 'tambah_aktivitas':
         $aktivitas->index();
@@ -75,10 +75,6 @@ switch ($url) {
 
     case 'laporan':
         $aktivitas->laporan();
-        break;
-
-    case 'grafik_admin':
-        $aktivitas->grafikAdmin();
         break;
 
     default:

@@ -17,7 +17,7 @@ class AuthController {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $confirm = $_POST['confirm_password'];
-            $role = $_POST['role'];
+            $role = "siswa"; 
             
             if ($password !== $confirm) {
             echo "Password tidak sama!";
@@ -25,10 +25,6 @@ class AuthController {
         }
 
         $password = password_hash($password, PASSWORD_DEFAULT);
-            if (!in_array($role, ['admin','siswa'])) {
-                echo "Role tidak valid!";
-                return;
-            }
 
             $this->userModel->register([
                 'nama' => $nama,
@@ -56,7 +52,6 @@ class AuthController {
             die("EMAIL TIDAK DITEMUKAN");
         }
 
-        // kode ini sementara TIDAK akan jalan karena exit di atas
         if (!password_verify($password, $user['password'])) {
             die("PASSWORD SALAH");
         }
@@ -81,7 +76,7 @@ class AuthController {
     }
 
     public function listUser() {
-        $users = $this->userModel->getAllUsers();
+        $users = $this->userModel->getAllSiswa();
         require '../app/views/admin/user_list.php';
     }
 

@@ -36,8 +36,9 @@ class UserModel {
         return $result->fetch_assoc();
     }
 
-    public function getAllUsers() {
-        $query = "SELECT * FROM users";
+    public function getAllSiswa() {
+        $query = "SELECT * FROM users
+                 WHERE role='siswa'";
 
         $result = $this->db->conn->query($query);
 
