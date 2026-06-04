@@ -104,7 +104,7 @@
         <?php endforeach; ?>
     </table>
 
-    <h3>📊 Grafik Aktivitas Admin</h3>
+    <h3>📊 Grafik Aktivitas</h3>
 
     <div class="chart-container">
         <canvas id="myChart"></canvas>

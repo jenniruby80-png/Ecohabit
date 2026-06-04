@@ -25,8 +25,7 @@
             margin: auto;
         }
 
-        /* HEADER */
-
+        /* HERO */
         .hero {
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
             color: white;
@@ -46,8 +45,7 @@
             line-height: 1.6;
         }
 
-        /* TOTAL POIN */
-
+        /* POINT CARD */
         .point-card {
             background: white;
             border-radius: 20px;
@@ -83,12 +81,13 @@
         }
 
         /* CARD */
-
         .card {
             background: #f8faf7;
             border-radius: 25px;
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            position: relative;
+            padding-bottom: 80px;
         }
 
         .section-title {
@@ -106,7 +105,6 @@
         }
 
         /* TABLE */
-
         .table-wrapper {
             overflow-x: auto;
         }
@@ -136,16 +134,11 @@
             border-bottom: 1px solid #edf2f7;
         }
 
-        tbody tr {
-            transition: .3s;
-        }
-
         tbody tr:hover {
             background: #f1fff1;
         }
 
-        /* NOMOR */
-
+        /* NUMBER */
         .number {
             width: 38px;
             height: 38px;
@@ -159,7 +152,6 @@
         }
 
         /* BADGE */
-
         .badge {
             display: inline-block;
             padding: 8px 14px;
@@ -171,14 +163,12 @@
         }
 
         /* DATE */
-
         .date {
             color: #555;
             font-weight: 500;
         }
 
         /* EMPTY */
-
         .empty {
             text-align: center;
             padding: 60px 20px;
@@ -190,27 +180,28 @@
             margin-bottom: 10px;
         }
 
-        /* BUTTON */
-
+        /* 🔥 ONLY BUTTON CHANGED */
         .btn-back {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 22px;
-            background: #4CAF50;
+            padding: 10px 18px;
+            background: #e53935;
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
-            transition: .3s;
+            font-size: 14px;
+            transition: .2s;
         }
 
         .btn-back:hover {
-            background: #43a047;
-            transform: translateY(-2px);
+            background: #c62828;
         }
 
         @media(max-width:768px) {
-
             .hero h1 {
                 font-size: 28px;
             }
@@ -222,10 +213,10 @@
 
             .card {
                 padding: 20px;
+                padding-bottom: 80px;
             }
 
-            th,
-            td {
+            th, td {
                 padding: 12px;
             }
         }
@@ -238,27 +229,17 @@
 
     <div class="hero">
         <h1>📖 Riwayat Kebiasaan</h1>
-        <p>
-            Lihat seluruh aktivitas dan kebiasaan positif yang telah kamu lakukan.
-        </p>
+        <p>Lihat seluruh aktivitas dan kebiasaan positif yang telah kamu lakukan.</p>
     </div>
 
     <div class="point-card">
-
-        <div class="point-icon">
-            🏆
-        </div>
-
+        <div class="point-icon">🏆</div>
         <div>
-            <div class="point-label">
-                Total Poin Terkumpul
-            </div>
-
+            <div class="point-label">Total Poin Terkumpul</div>
             <div class="point-value">
                 <?= $total_poin ?? 0; ?> Poin
             </div>
         </div>
-
     </div>
 
     <div class="card">
@@ -270,71 +251,52 @@
 
         <?php if (!empty($riwayat)): ?>
 
-            <div class="table-wrapper">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kebiasaan</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
 
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Kebiasaan</th>
-                            <th>Tanggal</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
+                <tbody>
                     <?php $no = 1; ?>
-
                     <?php foreach ($riwayat as $row): ?>
-
-                        <tr>
-
-                            <td>
-                                <div class="number">
-                                    <?= $no++; ?>
-                                </div>
-                            </td>
-
-                            <td>
-                                <span class="badge">
-                                    <?= htmlspecialchars($row['nama_kebiasaan']); ?>
-                                </span>
-                            </td>
-
-                            <td>
-                                <span class="date">
-                                    📅 <?= $row['tanggal']; ?>
-                                </span>
-                            </td>
-
-                        </tr>
-
+                    <tr>
+                        <td>
+                            <div class="number"><?= $no++; ?></div>
+                        </td>
+                        <td>
+                            <span class="badge">
+                                <?= htmlspecialchars($row['nama_kebiasaan']); ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="date">📅 <?= $row['tanggal']; ?></span>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
-
-                    </tbody>
-
-                </table>
-
-            </div>
+                </tbody>
+            </table>
+        </div>
 
         <?php else: ?>
-
-            <div class="empty">
-                <div class="empty-icon">📭</div>
-                <p>Tidak ada data riwayat kebiasaan.</p>
-            </div>
-
+        <div class="empty">
+            <div class="empty-icon">📭</div>
+            <p>Tidak ada data riwayat kebiasaan.</p>
+        </div>
         <?php endif; ?>
-
-        <a href="index.php?url=siswa" class="btn-back">
-            ← Kembali
-        </a>
 
     </div>
 
 </div>
 
-</body>
+<!-- tombol floating kanan bawah -->
+<a href="index.php?url=siswa" class="btn-back">
+    Kembali
+</a>
 
+</body>
 </html>
